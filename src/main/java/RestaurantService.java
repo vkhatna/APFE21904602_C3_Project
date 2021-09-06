@@ -33,4 +33,13 @@ public class RestaurantService  {
     public boolean isRestaurantOpen(Restaurant restaurant){
         return restaurant.getCurrentTime().isAfter(restaurant.openingTime) && restaurant.getCurrentTime().isBefore(restaurant.closingTime);
     }
+
+    public int calculateOrderTotal(List<Item> items){
+        int totalValue = 0;
+        for(Item item: items) {
+            totalValue = totalValue + item.getPrice();
+        }
+        return totalValue;
+    }
+
 }

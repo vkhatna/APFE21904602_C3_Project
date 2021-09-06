@@ -1,6 +1,8 @@
 import org.junit.jupiter.api.*;
 
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -9,6 +11,7 @@ class RestaurantServiceTest {
 
     RestaurantService service = new RestaurantService();
     Restaurant restaurant;
+
     //REFACTOR ALL THE REPEATED LINES OF CODE
 
     @BeforeEach
@@ -77,4 +80,26 @@ class RestaurantServiceTest {
         assertEquals(initialNumberOfRestaurants + 1,service.getRestaurants().size());
     }
     //<<<<<<<<<<<<<<<<<<<<ADMIN: ADDING & REMOVING RESTAURANTS>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+    @Test
+    public void should_return_zero_as_value_if_empty_item_list_passed_to_calculateOrderTotal(){
+        List<Item> items = new ArrayList<Item>();
+
+        int totalOrderValue = service.calculateOrderTotal(items);
+
+        assertEquals(0, totalOrderValue);
+    }
+
+    @Test
+    public void should_return_100_as_value_if_2_items_with_price_50_passed_to_calculateOrderTotal(){
+        List<Item> items = new ArrayList<Item>();
+        Item newItem = new Item("Idali",50);
+        Item newItem2 = new Item("Vada",50);
+        items.add(newItem);
+        items.add(newItem2);
+
+        int totalOrderValue = service.calculateOrderTotal(items);
+
+        assertEquals(100, totalOrderValue);
+    }
 }
